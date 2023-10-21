@@ -27,11 +27,6 @@ def next_state(seconds, fly, rest):
     return n, last_seconds
 
 
-def draw(arr):
-    m = len(set(arr))
-    return m == 1
-
-
 def solve(reindeers, seconds):
     distances = []
     for r in reindeers.values():
@@ -66,29 +61,19 @@ def solve2(reindeers, seconds):
             reindeers[r]["count"] += 1
 
         total_distances = []
-        names = []
-        for r in list(reindeers.keys()):
+        for r in names:
             total_distances.append(reindeers[r]["total_dst"])
-            names.append(r)
 
-        winners = []
-        if not draw(total_distances):
-            winner_val = max(total_distances)
-            total_distances.index(winner_val)
-            for j, d in enumerate(total_distances):
-                if d == winner_val:
-                    winners.append(names[j])
-
-        # print(i, winners)
-        # time.sleep(0.5)
-        for win in winners:
-            reindeers[win]["score"] += 1
+        winner_val = max(total_distances)
+        total_distances.index(winner_val)
+        for j, d in enumerate(total_distances):
+            if d == winner_val:
+                reindeers[names[j]]["score"] += 1
 
     scores = []
     for r in list(reindeers.keys()):
         scores.append(reindeers[r]["score"])
 
-    print(scores)
     return max(scores)
 
 
