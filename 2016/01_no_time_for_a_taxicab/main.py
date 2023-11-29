@@ -1,22 +1,22 @@
-def read_input(file="input.txt") -> list[tuple]:
+def read_input(file="input.txt"):
     with open(file, "r") as f:
         values = f.readline().strip().split(", ")
     return [(x[0], int(x[1:])) for x in values]
 
 
-def add_coord(a: tuple, b: tuple) -> tuple:
+def add_coord(a, b):
     return (a[0] + b[0], a[1] + b[1])
 
 
-def scale_coord(a: int, b: tuple) -> tuple:
+def scale_coord(a, b):
     return (a * b[0], a * b[1])
 
 
-def abs_coord(a: tuple) -> tuple:
+def abs_coord(a):
     return (abs(a[0]), abs(a[1]))
 
 
-def next_ref(ref: tuple, dir: str) -> tuple:
+def next_ref(ref, dir):
     REF = {
         (1, 0): {"R": (0, -1), "L": (0, 1)},
         (0, 1): {"R": (1, 0), "L": (-1, 0)},
@@ -26,7 +26,7 @@ def next_ref(ref: tuple, dir: str) -> tuple:
     return REF[ref][dir]
 
 
-def visited_pos_between(pos: tuple, dir: tuple, steps: int) -> list[tuple]:
+def visited_pos_between(pos, dir, steps):
     visited = []
 
     for i in range(steps):
@@ -36,7 +36,7 @@ def visited_pos_between(pos: tuple, dir: tuple, steps: int) -> list[tuple]:
     return visited
 
 
-def solve(ins: list[tuple]) -> int:
+def solve(ins):
     pos = (0, 0)
     ref = (0, 1)
 
