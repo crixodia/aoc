@@ -1,4 +1,4 @@
-def read_input(file: str = "input.txt") -> list[list["str"]]:
+def read_input(file="input.txt"):
     rows = []
     with open(file, "r") as f:
         for line in f:
@@ -6,7 +6,7 @@ def read_input(file: str = "input.txt") -> list[list["str"]]:
     return rows
 
 
-def solve(s: str) -> int:
+def solve(s):
     vc = 0
     vowel_flag = False
 

@@ -50,7 +50,7 @@ def add(S, idx=None):
     return S
 
 
-def skip(s: str):
+def skip(s):
     indices = []
     for c in ["i", "o", "l"]:
         idx = s.find(c)

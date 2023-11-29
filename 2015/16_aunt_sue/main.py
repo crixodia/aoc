@@ -14,7 +14,7 @@ MFCSAM = {
 }
 
 
-def read_input(file: str = "input.txt") -> dict:
+def read_input(file="input.txt"):
     sues = []
 
     with open(file, "r") as f:
@@ -32,7 +32,7 @@ def read_input(file: str = "input.txt") -> dict:
     return sues
 
 
-def solve(aunts: list[dict]) -> int:
+def solve(aunts) -> int:
     for aunt in aunts:
         match = True
 
@@ -50,7 +50,7 @@ def solve(aunts: list[dict]) -> int:
     return -1
 
 
-def solve2(aunts: list[dict]) -> int:
+def solve2(aunts):
     for aunt in aunts:
         match = True
         for key, val in aunt.items():

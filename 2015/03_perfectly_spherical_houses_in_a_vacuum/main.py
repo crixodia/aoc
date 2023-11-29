@@ -1,14 +1,14 @@
 import operator
 
 
-def read_input(file: str) -> str:
+def read_input(file):
     s = ""
     with open(file, "r") as f:
         s = f.readline()
     return s
 
 
-def solve(instructions: str) -> int:
+def solve(instructions):
     current = (0, 0)
     positions = [current]
     moves = {">": (1, 0), "v": (0, -1), "<": (-1, 0), "^": (0, 1)}
@@ -20,11 +20,11 @@ def solve(instructions: str) -> int:
     return len(positions)
 
 
-def split_instructions(instructions: str) -> list[str]:
+def split_instructions(instructions):
     return [instructions[::2], instructions[1::2]]
 
 
-def solve_2(instructions_s: list[str]) -> int:
+def solve_2(instructions_s):
     current = (0, 0)
     positions = [current]
     moves = {">": (1, 0), "v": (0, -1), "<": (-1, 0), "^": (0, 1)}
