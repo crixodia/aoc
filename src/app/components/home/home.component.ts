@@ -14,14 +14,16 @@ import { Event } from '../../interfaces/events';
 })
 export class HomeComponent {
   events: Event[] = [];
+  loadingImages: boolean[] = [];
 
   constructor(private eventsService: EventsService) {
     this.eventsService.getEvents().subscribe({
       next: (data: any) => {
         this.events = data;
+        this.loadingImages = new Array(this.events.length).fill(true);
       },
       error: (error: any) => {
-        console.error('Error:', error);
+        // console.error('Error:', error);
       }
     });
   }

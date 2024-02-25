@@ -3,4 +3,5 @@ export interface Event {
     imageUrl: string;
     aocUrl: string;
     gitUrl: string;
+    done: boolean;
 }
