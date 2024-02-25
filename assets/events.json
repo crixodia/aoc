@@ -3,54 +3,63 @@
         "year": 2015,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2015",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2015"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2015",
+        "done": true
     },
     {
         "year": 2016,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2016",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2016"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2016",
+        "done": false
     },
     {
         "year": 2017,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2017",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2017"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2017",
+        "done": false
     },
     {
         "year": 2018,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2018",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2018"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2018",
+        "done": false
     },
     {
         "year": 2019,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2019",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2019"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2019",
+        "done": false
     },
     {
         "year": 2020,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2020",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2020"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2020",
+        "done": false
     },
     {
         "year": 2021,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2021",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2021"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2021",
+        "done": false
     },
     {
         "year": 2022,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2022",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2022"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2022",
+        "done": false
     },
     {
         "year": 2023,
         "imageUrl": "",
         "aocUrl": "https://adventofcode.com/2023",
-        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2023"
+        "gitUrl": "https://github.com/crixodia/aoc/tree/main/2023",
+        "done": false
     }
 ]
