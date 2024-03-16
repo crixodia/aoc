@@ -3,6 +3,7 @@ import { EventsService } from '../../services/events/events.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Event } from '../../interfaces/events';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent {
   events: Event[] = [];
   loadingImages: boolean[] = [];
 
-  constructor(private eventsService: EventsService) {
+  constructor(private eventsService: EventsService, private router: Router) {
     this.eventsService.getEvents().subscribe({
       next: (data: any) => {
         this.events = data;
@@ -26,5 +27,9 @@ export class HomeComponent {
         // console.error('Error:', error);
       }
     });
+  }
+
+  navigateEvent(year: number) {
+    this.router.navigate([year.toString()]);
   }
 }
