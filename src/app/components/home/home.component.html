@@ -2,14 +2,13 @@
     @for (event of events; track event){
     @if ( event.done ){
     <div (click)="navigateEvent(event.year)"
-        class="card card-compact w-64 m-3 bg-base-200 hover:shadow-xl cursor-pointer">
+        class="w-full card card-compact md:w-64 m-3 bg-base-200 shadow-md hover:shadow-lg cursor-pointer transition duration-500 ease">
         <figure>
             <img [ngClass]="loadingImages[0]?'skeleton':''" class="object-cover rounded-b-none w-full h-64" src="{{ event.imageUrl? event.imageUrl : 'assets/img/advent-of-code-placeholder.webp' }}"
                 alt="Advent of Code {{ event.year }}" />
         </figure>
         <div class="card-body items-center text-center">
             <div class="card-actions justify-center items-center">
-
                 <div class="tooltip" data-tip="GitHub source code">
                     <a [href]="event.gitUrl" target="_blank">
                         <button class="btn btn-circle btn-neutral btn-sm">

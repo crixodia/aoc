@@ -1,63 +1,50 @@
-<div class="container m-auto">
-    <div class="wrapper bg-base-100 rounded shadow w-full ">
-        <div class="header flex justify-between border-b p-3">
-            <span (click)="changeYear(0)" class="text-xl font-bold cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                    class="bi bi-grid-3x3-gap-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z" />
-                </svg>
-            </span>
-            <span class="text-xl font-bold">
-                December {{ eventYear }}
-            </span>
-            <div class="buttons">
-                <button class="p-1" (click)="changeYear(eventYear - 1)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                        class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
-                    </svg>
-                </button>
-                <button class="p-1" (click)="changeYear(eventYear + 1)">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                        class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
+<div class="flex items-center justify-between mx-3 mt-3 md:mb-3 md:mx-auto md:gap-3">
+    <button (click)="changeYear(eventYear - 1)" class="md:ml-auto btn btn-square">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+            class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+        </svg>
+    </button>
+
+    <button (click)="changeYear(0)" class="btn btn-square btn-wide text-2xl font-bold">
+        {{ eventYear }}
+    </button>
+
+    <button (click)="changeYear(eventYear + 1)" class="md:mr-auto btn btn-square">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+            class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+        </svg>
+    </button>
+</div>
+
+<div class="invisible h-0 md:h-auto md:visible lg:container lg:m-auto">
+    <div class="wrapper bg-base-100 rounded w-full">
         <table class="w-full">
             <thead>
                 <tr>
-                    <th class="p-2 border-l border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Sunday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sun</span>
                     </th>
-                    <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Monday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Mon</span>
                     </th>
-                    <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Tuesday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Tue</span>
                     </th>
-                    <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Wednesday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Wed</span>
                     </th>
-                    <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Thursday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Thu</span>
                     </th>
-                    <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Friday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Fri</span>
                     </th>
-                    <th class="p-2 border-r h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Saturday</span>
-                        <span class="xl:hidden lg:hidden md:hidden sm:hidden block">Sat</span>
                     </th>
                 </tr>
             </thead>
@@ -65,10 +52,10 @@
                 @for (row of this.calendarNumbers; track row.valueOf; let i = $index) {
                 <tr class="text-center">
                     @for (col of row; track col.valueOf; let j = $index) {
-                    <td [class]="calendarDisabled[i][j]? '':'hover:bg-primary-content cursor-pointer bg-base-300'"
-                        class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease ">
+                    <td [class]="calendarDisabled[i][j]? '':'hover:bg-primary cursor-pointer bg-base-300 hover:dark:text-accent-content'"
+                        class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease">
                         <div class="flex flex-col h-40 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                            <div class="top h-5 w-full">
+                            <div class="top h-5 w-full font-mono">
                                 <span class="">{{ col }}</span>
                             </div>
                             <!--div class="bottom flex-grow h-30 py-1 w-full">
@@ -97,4 +84,33 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<div class="md:hidden">
+    @for (row of this.calendarNumbers; track row.valueOf; let i = $index) {
+    @for (col of row; track col.valueOf; let j = $index) {
+    @if(calendarDisabled[i][j] == false){
+    <div class="m-3 flex items-center gap-3">
+        <div class="flex flex-col items-center rounded-box p-3 bg-base-200 shadow-md">
+            <span class="countdown font-mono text-5xl">
+                <span [style]="'--value:'+col+';'"></span>
+            </span>
+            <span class="text-xs">{{ getDayLabel((weekDayStart + col - 1)%7) }}</span>
+        </div>
+        <div
+            class="hover:dark:text-accent-content flex items-center rounded-2xl cursor-pointer bg-base-200 transition duration-500 ease hover:bg-primary shadow-md w-full gap-3 p-3">
+            <div class="avatar">
+                <div class="w-16 rounded-lg">
+                    <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png"
+                        alt="Avatar Tailwind CSS Component" />
+                </div>
+            </div>
+            <div>
+                <div class="font-bold">Hart dsasd sdasdas asdasd ssssrty</div>
+            </div>
+        </div>
+    </div>
+    }
+    }
+    }
 </div>
