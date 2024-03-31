@@ -117,4 +117,8 @@ export class EventComponent implements OnInit {
         return '';
     }
   }
+
+  navigateSolver(day: number) {
+    this.router.navigate([this.eventYear, day.toString()]);
+  }
 }

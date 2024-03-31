@@ -52,8 +52,10 @@
                 @for (row of this.calendarNumbers; track row.valueOf; let i = $index) {
                 <tr class="text-center">
                     @for (col of row; track col.valueOf; let j = $index) {
-                    <td [class]="calendarDisabled[i][j]? '':'hover:bg-primary cursor-pointer bg-base-300 hover:dark:text-accent-content'"
-                        class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease">
+                    <td (click)="calendarDisabled[i][j]?'': navigateSolver(col)"
+                        [class]="calendarDisabled[i][j]? '':'hover:bg-primary cursor-pointer bg-base-300 hover:dark:text-accent-content'"
+                        class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease"
+                        style="background-image: none; background-position: center center; background-repeat: no-repeat;">
                         <div class="flex flex-col h-40 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
                             <div class="top h-5 w-full font-mono">
                                 <span class="">{{ col }}</span>
@@ -97,8 +99,8 @@
             </span>
             <span class="text-xs">{{ getDayLabel((weekDayStart + col - 1)%7) }}</span>
         </div>
-        <div
-            class="hover:dark:text-accent-content flex items-center rounded-2xl cursor-pointer bg-base-200 transition duration-500 ease hover:bg-primary shadow-md w-full gap-3 p-3">
+        <div class="hover:dark:text-accent-content flex items-center rounded-2xl cursor-pointer bg-base-200 transition duration-500 ease hover:bg-primary shadow-md w-full gap-3 p-3"
+            (click)="navigateSolver(col)">
             <div class="avatar">
                 <div class="w-16 rounded-lg">
                     <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png"

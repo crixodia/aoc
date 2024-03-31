@@ -1,10 +1,12 @@
 <div class="flex-wrap flex justify-center">
     @for (event of events; track event){
     @if ( event.done ){
-    <div (click)="navigateEvent(event.year)"
+    <div
         class="w-full card card-compact md:w-64 m-3 bg-base-200 shadow-md hover:shadow-lg cursor-pointer transition duration-500 ease">
         <figure>
-            <img [ngClass]="loadingImages[0]?'skeleton':''" class="object-cover rounded-b-none w-full h-64" src="{{ event.imageUrl? event.imageUrl : 'assets/img/advent-of-code-placeholder.webp' }}"
+            <img (click)="navigateEvent(event.year)" [ngClass]="loadingImages[0]?'skeleton':''"
+                class="object-cover rounded-b-none w-full h-64"
+                src="{{ event.imageUrl? event.imageUrl : 'assets/img/advent-of-code-placeholder.webp' }}"
                 alt="Advent of Code {{ event.year }}" />
         </figure>
         <div class="card-body items-center text-center">
