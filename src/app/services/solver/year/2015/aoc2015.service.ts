@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getCombinations } from '../../helpers'
+import { getCombinations, addArrs, containsArray } from '../../helpers'
 
 @Injectable({
   providedIn: 'root'
@@ -72,5 +72,55 @@ export class Aoc2015Service {
     }
 
     return [areaSum, periVolSum]
+  }
+
+  /**
+   * Day 3: Perfectly Spherical Houses in a Vacuum
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   */
+  day3(input: string): [number, number] {
+    const moves: { [key: string]: number[] } = { ">": [1, 0], "v": [0, -1], "<": [-1, 0], "^": [0, 1] };
+
+    const partOne = (instructions: string): number[][] => {
+      let current: number[] = [0, 0];
+      let positions: number[][] = [current];
+      for (const c of instructions) {
+        current = addArrs(moves[c], current);
+        if (!containsArray(positions, current)) {
+          positions.push(current);
+        }
+      }
+      return positions;
+    }
+
+    const partTwo = (instructions: string): number[][] => {
+      let instructionsA: string = "";
+      let instructionsB: string = "";
+      let current: number[] = [0, 0];
+      let positions: number[][] = [current];
+
+      for (let i = 0; i < instructions.length; i++) {
+        if (i % 2 == 0) {
+          instructionsA += instructions[i]
+        } else {
+          instructionsB += instructions[i]
+        }
+      }
+
+      const iAB: string[] = [instructionsA, instructionsB];
+      for (const I of iAB) {
+        current = [0, 0];
+        for (const c of I) {
+          current = addArrs(current, moves[c]);
+          if (!containsArray(positions, current)) {
+            positions.push(current);
+          }
+        }
+      }
+      return positions;
+    }
+
+    return [partOne(input).length, partTwo(input).length]
   }
 }

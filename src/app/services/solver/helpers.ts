@@ -29,3 +29,46 @@ export function getCombinations<T>(arr: T[], size: number): T[][] {
 
   return combinations;
 }
+
+/**
+ * Adds two arrays.
+ * @param {number[]} arrA - The first array.
+ * @param {number[]} arrB - The second array. 
+ * @returns {number[]} - The sum of the two arrays.
+ */
+export function addArrs(arrA: number[], arrB: number[]): number[] {
+  let response = [];
+  for (let i: number = 0; i < arrA.length; i++) {
+    response.push(arrA[i] + arrB[i]);
+  }
+  return response;
+}
+
+/**
+ * Compares two arrays.
+ * @param {any[]} arrayA - The first array.
+ * @param {any[]} arrayB - The second array.
+ * @returns {boolean} - True if the arrays are equal, false otherwise.
+ */
+export function arraysEqual(arrayA: any[], arrayB: any[]): boolean {
+  if (arrayA.length !== arrayB.length) return false;
+  for (let i = 0; i < arrayA.length; i++) {
+    if (arrayA[i] !== arrayB[i]) return false;
+  }
+  return true;
+}
+
+/**
+ * Checks if an array contains another array.
+ * @param {any[][]} source - The source array.
+ * @param {any[]} target - The target array.
+ * @returns {boolean} - True if the source array contains the target array, false otherwise.
+ */
+export function containsArray(source: any[][], target: any[]): boolean {
+  for (const array of source) {
+    if (arraysEqual(array, target)) {
+      return true;
+    }
+  }
+  return false;
+}
