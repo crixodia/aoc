@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between mx-3 mt-3 md:mb-3 md:mx-auto md:gap-3">
-    <button (click)="changeYear(eventYear - 1)" class="md:ml-auto btn btn-square">
+    <button (click)="changeYear(eventYear - 1)" class="md:ml-auto btn btn-square btn-neutral">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
             class="bi bi-arrow-left-short" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -7,11 +7,11 @@
         </svg>
     </button>
 
-    <button (click)="changeYear(0)" class="btn btn-square btn-wide text-2xl font-bold">
+    <button (click)="changeYear(0)" class="btn btn-square btn-wide text-2xl font-bold btn-primary">
         {{ eventYear }}
     </button>
 
-    <button (click)="changeYear(eventYear + 1)" class="md:mr-auto btn btn-square">
+    <button (click)="changeYear(eventYear + 1)" class="md:mr-auto btn btn-square btn-neutral">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
             class="bi bi-arrow-right-short" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
     <div class="wrapper bg-base-100 rounded w-full">
         <table class="w-full">
             <thead>
-                <tr>
+                <tr class="bg-neutral">
                     <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Sunday</span>
                     </th>
@@ -57,7 +57,7 @@
                         class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease"
                         style="background-image: none; background-position: center center; background-repeat: no-repeat;">
                         <div class="flex flex-col h-40 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                            <div class="top h-5 w-full font-mono">
+                            <div class="top h-5 w-full font-mono font-bold">
                                 <span class="">{{ col }}</span>
                             </div>
                             <!--div class="bottom flex-grow h-30 py-1 w-full">
