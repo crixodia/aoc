@@ -12,7 +12,7 @@
         <div class="card-body items-center text-center">
             <div class="card-actions justify-center items-center">
                 <div class="tooltip" data-tip="GitHub source code">
-                    <a [href]="event.gitUrl" target="_blank">
+                    <a [href]="gitUrl+event.year" target="_blank">
                         <button class="btn btn-circle btn-neutral btn-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-github" viewBox="0 0 16 16">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="tooltip" data-tip="Advent of Code page">
-                    <a [href]="event.aocUrl" target="_blank">
+                    <a [href]="aocUrl+event.year" target="_blank">
                         <button class="btn btn-circle btn-neutral btn-sm">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-asterisk" viewBox="0 0 16 16">

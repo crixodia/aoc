@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Event } from '../../interfaces/events';
 import { Router } from '@angular/router';
+import { AOC_URL, GIT_URL } from '../../services/config/config.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,9 @@ import { Router } from '@angular/router';
 export class HomeComponent {
   events: Event[] = [];
   loadingImages: boolean[] = [];
+
+  aocUrl = AOC_URL;
+  gitUrl = GIT_URL;
 
   constructor(private eventsService: EventsService, private router: Router) {
     this.eventsService.getEvents().subscribe({
