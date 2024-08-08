@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getCombinations, addArrs, containsArray } from '../../helpers'
+import { Md5 } from 'ts-md5';
 
 @Injectable({
   providedIn: 'root'
@@ -122,5 +123,32 @@ export class Aoc2015Service {
     }
 
     return [partOne(input).length, partTwo(input).length]
+  }
+
+  /**
+   * Day 4: The Ideal Stocking Stuffer
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   */
+  day4 = (input: string): number[] => {
+    const solve = (input: string, times: number): number => {
+      let i: number = 0;
+      let z: string = "";
+
+      for (let j = 0; j < times; j++) {
+        z += "0";
+      }
+
+      for (; i < 10000000; i++) {
+        const to_hash_tmp: string = input + i.toString();
+        const hash: string = Md5.hashStr(to_hash_tmp);
+        if (hash.startsWith(z)) {
+          return i
+        }
+      }
+      return -1;
+    }
+
+    return [solve(input, 5), solve(input, 6)];
   }
 }
