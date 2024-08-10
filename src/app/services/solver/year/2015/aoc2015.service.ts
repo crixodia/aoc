@@ -13,6 +13,7 @@ export class Aoc2015Service {
    * Day 1: Not Quite Lisp
    * @param input {string} - The input string.
    * @returns {[number, number]} - [Part One, Part Two] solution.
+   * @see https://adventofcode.com/2015/day/1
    */
   day1(input: string): [number, number] {
     const readInput = (data: string): string[] => {
@@ -42,6 +43,7 @@ export class Aoc2015Service {
    * Day 2: I Was Told There Would Be No Math
    * @param input {string} - The input string.
    * @returns {[number, number]} - [Part One, Part Two] solution.
+   * @see https://adventofcode.com/2015/day/2
    */
   day2(input: string): [number, number] {
     const readInput = (data: string): number[][] => {
@@ -79,6 +81,7 @@ export class Aoc2015Service {
    * Day 3: Perfectly Spherical Houses in a Vacuum
    * @param input {string} - The input string.
    * @returns {[number, number]} - [Part One, Part Two] solution.
+   * @see https://adventofcode.com/2015/day/3
    */
   day3(input: string): [number, number] {
     const moves: { [key: string]: number[] } = { ">": [1, 0], "v": [0, -1], "<": [-1, 0], "^": [0, 1] };
@@ -129,6 +132,7 @@ export class Aoc2015Service {
    * Day 4: The Ideal Stocking Stuffer
    * @param input {string} - The input string.
    * @returns {[number, number]} - [Part One, Part Two] solution.
+   * @see https://adventofcode.com/2015/day/4
    */
   day4 = (input: string): number[] => {
     const solve = (input: string, times: number): number => {
@@ -150,5 +154,59 @@ export class Aoc2015Service {
     }
 
     return [solve(input, 5), solve(input, 6)];
+  }
+
+  /**
+   * Day 5: Doesn't He Have Intern-Elves For This?
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   * @see https://adventofcode.com/2015/day/5
+   */
+  day5 = (input: string): number[] => {
+    const readInput = (input: string): string[] => {
+      return input.split("\n");
+    }
+
+    const partOne = (s: string): number => {
+      let vc: number = 0;
+      let vowelFlag: boolean = false;
+      let lastTwo: string[] = ["", ""];
+      const vowels: string[] = ["a", "e", "i", "o", "u"];
+      const twoCondition: string[] = ["ab", "cd", "pq", "xy"];
+
+      for (const c of s) {
+        lastTwo.push(c);
+        lastTwo.shift();
+
+        if (twoCondition.includes(lastTwo.join(""))) return 0;
+        if (lastTwo.join("") === c + c) vowelFlag = true;
+        if (vowels.includes(c)) vc++;
+      }
+
+      return Number(vc >= 3 && vowelFlag);
+    }
+
+    const partTwo = (s: string): number => {
+      let c1: boolean = false;
+      let c2: boolean = false;
+
+      for (let i = 0; i < s.length; i++) {
+        if (i + 2 >= s.length) continue;
+        if (s[i] === s[i + 2]) c2 = true;
+
+        for (let j = i + 2; j < s.length; j++)
+          if (s.substring(i, i + 2) === s.substring(j, j + 2)) c1 = true;
+      }
+      return Number(c1 && c2);
+    }
+
+    let s1: number = 0;
+    let s2: number = 0;
+    for (const r of readInput(input)) {
+      s1 += partOne(r);
+      s2 += partTwo(r);
+    }
+
+    return [s1, s2];
   }
 }
