@@ -72,3 +72,10 @@ export function containsArray(source: any[][], target: any[]): boolean {
   }
   return false;
 }
+
+/**
+ * Gets the sum of an array.
+ * @param {number[]} arr - The array to sum.
+ * @returns {number} - The sum of the array.
+ */
+export const sumArray = (arr: number[]): number => arr.reduce((a, b) => a + b, 0);

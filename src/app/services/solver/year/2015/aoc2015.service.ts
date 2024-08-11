@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getCombinations, addArrs, containsArray } from '../../helpers'
+import { getCombinations, addArrs, containsArray, sumArray } from '../../helpers'
 import { Md5 } from 'ts-md5';
 
 @Injectable({
@@ -209,4 +209,64 @@ export class Aoc2015Service {
 
     return [s1, s2];
   }
+
+  /**
+   * Day 6: Probably a Fire Hazard
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   */
+  day6 = (input: string): number[] => {
+    const readInput = (input: string): number[][] => {
+      let parsedInput: number[][] = [];
+      const lines: string[] = input.split("\n");
+      for (const line of lines) {
+        let temp: string = "";
+        temp = line.replace(" through", ",");
+        temp = temp.replace("turn on ", "1,");
+        temp = temp.replace("turn off ", "-1,");
+        temp = temp.replace("toggle ", "2,");
+
+        parsedInput.push(temp.split(",").map((x) => Number(x)));
+      }
+      return parsedInput;
+    }
+
+    const partOne = (parsedInput: number[][]): number => {
+      let grid: boolean[][] = Array.from({ length: 1000 }, () => Array(1000).fill(false));
+      for (const row of parsedInput) {
+        const [state, x, y, X, Y] = row;
+
+        for (let i = x; i <= X; i++) {
+          for (let j = y; j <= Y; j++) {
+            if (state === 1) grid[i][j] = true;
+            else if (state === -1) grid[i][j] = false;
+            else grid[i][j] = !grid[i][j];
+          }
+        }
+      }
+
+      const sumGrid = grid.flat().reduce((sum, val) => sum + (val ? 1 : 0), 0);
+      return sumGrid;
+    }
+
+    const partTwo = (parsedInput: number[][]): number => {
+      let grid: number[][] = Array.from({ length: 1000 }, () => Array(1000).fill(0));
+      for (const row of parsedInput) {
+        const [state, x, y, X, Y] = row;
+
+        for (let i = x; i <= X; i++) {
+          for (let j = y; j <= Y; j++) {
+            if (state === -1 && grid[i][j] === 0) continue;
+            grid[i][j] = grid[i][j] + state;
+          }
+        }
+      }
+
+      return sumArray(grid.map((x) => sumArray(x)));
+    }
+
+    const parsedInput = readInput(input);
+    return [partOne(parsedInput), partTwo(parsedInput)];
+  }
 }
+
