@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getCombinations, addArrs, containsArray, sumArray } from '../../helpers'
+import { getCombinations, addArrs, containsArray, sumArray, isDecimal } from '../../helpers'
 import { Md5 } from 'ts-md5';
 
 @Injectable({
@@ -267,6 +267,114 @@ export class Aoc2015Service {
 
     const parsedInput = readInput(input);
     return [partOne(parsedInput), partTwo(parsedInput)];
+  }
+
+  /**
+   * Day 7: Some Assembly Required
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   */
+  day7 = (input: string): number[] => {
+    const readInput = (input: string): string[][] => {
+      return input.split("\n").map((x) => x.split(" -> ").reverse())
+    }
+
+    const unsigned = (n: number): number => { return n % (1 << 16); }
+
+    const evaluate = (a: number, op: string, b: number): number => {
+      let ans: number = NaN;
+      switch (op) {
+        case "NOT":
+          ans = unsigned(~a);
+          break;
+        case "AND":
+          ans = unsigned(a & b);
+          break;
+        case "OR":
+          ans = unsigned(a | b);
+          break;
+        case "LSHIFT":
+          ans = unsigned(a << b);
+          break;
+        case "RSHIFT":
+          ans = unsigned(a >> b);
+          break;
+        default:
+          ans = unsigned(a);
+      }
+      return ans;
+    }
+
+    const replaceSignal = (rows: string[][], signal: string, value: number): void => {
+      for (let i = 0; i < rows.length; i++) {
+        const [sig, ins] = rows[i];
+        if (signal === sig) rows[i] = [sig, `${value}`];
+      }
+    }
+
+    const partOneTwo = (rows: string[][]): Map<string, number> => {
+
+      let signals: Map<string, number> = new Map();
+      let i = 0;
+      while (rows.length > 0) {
+        const [sig, ins]: string[] = rows[i];
+        let instruction = ins.split(" ").map((x) => x.trim());
+        const n = instruction.length;
+
+        let a: string = "";
+        let op: string = "";
+        let b: string = "";
+
+        let aVal: number = NaN;
+        let bVal: number = NaN;
+
+        switch (n) {
+          case 1:
+            a = instruction[0];
+
+            if (isDecimal(a)) aVal = Number(a); else aVal = signals.get(a) ?? NaN;
+
+            if (!isNaN(aVal)) {
+              signals.set(sig, evaluate(aVal, "", 0));
+              rows.splice(i, 1);
+              i = -1;
+            }
+            break;
+
+          case 2:
+            [op, a] = instruction;
+            if (isDecimal(a)) aVal = Number(a); else aVal = signals.get(a) ?? NaN;
+            if (!isNaN(aVal)) {
+              signals.set(sig, evaluate(aVal, op, 0));
+              rows.splice(i, 1);
+              i = -1;
+            }
+            break;
+
+          default:
+            [a, op, b] = instruction;
+            if (isDecimal(a)) aVal = Number(a); else aVal = signals.get(a) ?? NaN;
+            if (isDecimal(b)) bVal = Number(b); else bVal = signals.get(b) ?? NaN;
+
+            if (!isNaN(aVal) && !isNaN(bVal)) {
+              signals.set(sig, evaluate(aVal, op, bVal));
+              rows.splice(i, 1);
+              i = -1;
+            }
+        }
+        i++;
+      }
+      return signals;
+    }
+
+    let parsedInput: string[][] = readInput(input);
+    const ans1: number = partOneTwo(parsedInput).get("a") ?? NaN;
+
+    parsedInput = readInput(input);
+    replaceSignal(parsedInput, "b", ans1);
+    const ans2: number = partOneTwo(parsedInput).get("a") ?? NaN;
+
+    return [ans1, ans2];
   }
 }
 
