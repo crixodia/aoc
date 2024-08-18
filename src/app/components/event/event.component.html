@@ -65,18 +65,18 @@
                         [class]="calendarDisabled[i][j]? 'text-neutral-content/50':'hover:bg-neutral cursor-pointer bg-base-300'"
                         class="bg-base-200 rounded-3xl xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease">
                         <div class="flex flex-col h-32 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                            <div class="top h-5 my-2 w-full font-mono font-bold">
+                            <div class="top h-5 mb-2 w-full font-mono font-bold">
                                 <span class="text-lg">{{ col }}</span>
                             </div>
                             @if (calendarDisabled[i][j] == false) {
-                            <div class="flex-grow">
+                            <div class="flex-grow mx-1">
                                 <div class="text-sm">
                                     <span>
                                         {{ getDayName(col) }}
                                     </span>
                                 </div>
                             </div>
-                            <div class="p-3 w-full">
+                            <div class="pb-3 w-full">
                                 <div class="text-sm">
                                     <span>
                                         {{ getEmojiStory(col) }}
