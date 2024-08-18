@@ -376,5 +376,48 @@ export class Aoc2015Service {
 
     return [ans1, ans2];
   }
+
+  /**
+   * Day 8: Matchsticks
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   */
+  day8 = (input: string): number[] => {
+    const partOne = (parsedInput: string[]): number => {
+
+      let slCount: number = 0;
+      let memCount: number = 0;
+
+      for (const row of parsedInput) {
+        slCount += row.length;
+
+        const decoded = eval(`${row}`);
+        memCount += decoded.length;
+      }
+
+      return slCount - memCount;
+    }
+
+    const partTwo = (parsedInput: string[]): number => {
+
+      let slCount: number = 0;
+      let encCount: number = 0;
+
+      for (const row of parsedInput) {
+        slCount += row.length;
+
+        let encoded: string = JSON.stringify(row);
+        encCount += encoded.length;
+      }
+
+      return encCount - slCount;
+    }
+
+    const parsedInput: string[] = input.split("\n");
+    const ans1: number = partOne(parsedInput);
+    const ans2: number = partTwo(parsedInput);
+
+    return [ans1, ans2];
+  }
 }
 

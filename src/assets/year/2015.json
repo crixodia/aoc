@@ -40,5 +40,11 @@
         "emojiStory": "🧩🔧💡",
         "gitFolderName": "07_some_assembly_required",
         "name": "Some Assembly Required"
+    },
+    {
+        "day": 8,
+        "emojiStory": "📝🔢💾",
+        "gitFolderName": "08_matchsticks",
+        "name": "Matchsticks"
     }
 ]
