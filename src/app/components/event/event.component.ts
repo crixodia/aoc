@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { EventsService } from '../../services/events/events.service';
-
+import { EventDay } from '../../interfaces/events';
 
 @Component({
   selector: 'app-event',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, HttpClientModule, CommonModule],
+  providers: [EventsService],
   templateUrl: './event.component.html',
   styleUrl: './event.component.css'
 })
@@ -15,6 +18,8 @@ export class EventComponent implements OnInit {
   calendarNumbers: number[][] = [];
   calendarDisabled: boolean[][] = [];
   weekDayStart: number = 0;
+
+  eventDaysData: EventDay[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private eventService: EventsService) { }
 
@@ -25,15 +30,26 @@ export class EventComponent implements OnInit {
 
   loadCalendar() {
     this.weekDayStart = this.zellerCongruenceJulian(this.eventYear, 12);
-    this.genCalendarNumbers(this.weekDayStart);
-    this.eventService.getEventsYearList().subscribe({
-      next: (data: any) => {
-        if (data.indexOf(this.eventYear) === -1) {
-          this.router.navigate(['/']);
-        }
+
+    this.eventService.getEventDays(this.eventYear).subscribe({
+      next: (daysData: any) => {
+        this.eventDaysData = daysData;
+        
+        this.genCalendarNumbers(this.weekDayStart);
+        this.eventService.getEventsYearList().subscribe({
+          next: (yearsData: any) => {
+            if (yearsData.indexOf(this.eventYear) === -1) {
+              this.router.navigate(['/']);
+            }
+          },
+          error: (error: any) => {
+            this.router.navigate(['/']);
+          }
+        });
+
       },
       error: (error: any) => {
-        // console.error('Error:', error);
+        this.router.navigate(['/']);
       }
     });
   }
@@ -82,7 +98,7 @@ export class EventComponent implements OnInit {
     let j: number = 1;
     for (let i = weekDay; i < 31 + weekDay; i++) {
       this.calendarNumbers[row][i % 7] = j;
-      this.calendarDisabled[row][i % 7] = j > 25;
+      this.calendarDisabled[row][i % 7] = j > 25 || this.eventDaysData.filter((eventDay) => eventDay.day === j).length === 0;
       j++;
       if (i % 7 == 6) {
         row++;
@@ -120,5 +136,32 @@ export class EventComponent implements OnInit {
 
   navigateSolver(day: number) {
     this.router.navigate([this.eventYear, day.toString()]);
+  }
+
+  getImageUrl(day: number) {
+    let eventDay = this.eventDaysData.filter((eventDay) => eventDay.day === day);
+    if (eventDay.length === 0) {
+      return '';
+    }
+
+    return eventDay[0].emojiStory;
+  }
+
+  getDayName(day: number) {
+    let eventDay = this.eventDaysData.filter((eventDay) => eventDay.day === day);
+    if (eventDay.length === 0) {
+      return '';
+    }
+
+    return eventDay[0].name;
+  }
+
+  getEmojiStory(day: number) {
+    let eventDay = this.eventDaysData.filter((eventDay) => eventDay.day === day);
+    if (eventDay.length === 0) {
+      return '';
+    }
+
+    return eventDay[0].emojiStory;
   }
 }

@@ -1,18 +1,85 @@
-<div class="flex h-screen">
+<div class="flex h-svh">
     <div class="m-auto w-screen sm:max-w-4xl h-full md:h-fit">
-        <div class="mockup-window border bg-base-300 h-full">
-            <textarea [(ngModel)]="input" class="mx-3 mt-3 font-mono textarea textarea-bordered h-full md:h-96"
+        <div class="mockup-window bg-base-300 h-full shadow-2xl">
+
+            <div class="w-full flex justify-center items-center px-5">
+                <h1 class="text-center text-lg font-bold">Advent of Code {{ eventYear }} - Day {{ eventDay }}: {{ name
+                    }}</h1>
+            </div>
+
+            <textarea [(ngModel)]="input" class="mx-3 mt-3 font-mono textarea h-full md:h-96"
                 placeholder="Please provide the puzzle input for Day {{ eventDay }} of the {{ eventYear }} Advent of Code event."></textarea>
 
-            <div class="w-full flex justify-end">
-                <button (click)="navigateCancel()" class="btn btn-lg btn-primary m-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-                        class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd"
-                            d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
-                    </svg>
-                </button>
-                <button (click)="solve()" class="btn btn-lg btn-success my-3 mr-3">Solve</button>
+            <div class="w-full flex justify-center items-center gap-3 my-3">
+
+                <div class="tooltip" [attr.data-tip]="eventDay !== 1 ? 'Day ' + (eventDay - 1) : null">
+                    <button (click)="previousDay()" class="btn btn-circle" [class.disabled]="eventDay === 1"
+                        [attr.disabled]="eventDay === 1 ? true : null">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+                        </svg>
+                    </button>
+                </div>
+
+
+                <div class="tooltip" data-tip="Calendar">
+                    <button (click)="navigateCancel()" class="btn btn-neutral btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-calendar-event-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2m-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="tooltip" data-tip="Get solution">
+                    <a [href]="gitUrl+eventYear+'/'+gitFolderName" target="_blank">
+                        <button class="btn btn-neutral btn-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-code-slash" viewBox="0 0 16 16">
+                                <path
+                                    d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0" />
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+
+                <div class="tooltip" data-tip="Get puzzle input">
+                    <a [href]="aocUrl+eventYear+'/day/'+eventDay+'/input'" target="_blank">
+                        <button class="btn btn-warning btn-circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-asterisk" viewBox="0 0 16 16">
+                                <path
+                                    d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1" />
+                            </svg>
+                        </button>
+                    </a>
+                </div>
+
+                <div class="tooltip" data-tip="Solve this!">
+                    <button (click)="solve()" class="btn btn-primary btn-circle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            class="bi bi-check-lg" viewBox="0 0 16 16">
+                            <path
+                                d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="tooltip" [attr.data-tip]="eventDay !== 25 ? 'Day ' + (eventDay + 1) : null">
+                    <button (click)="nextDay()" class="btn btn-circle" [class.disabled]="eventDay === 25"
+                        [attr.disabled]="eventDay === 25 ? true : null">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                            class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                        </svg>
+                    </button>
+                </div>
+
+
             </div>
         </div>
     </div>

@@ -1,49 +1,57 @@
-<div class="flex items-center justify-between mx-3 mt-3 md:mb-3 md:mx-auto md:gap-3">
-    <button (click)="changeYear(eventYear - 1)" class="md:ml-auto btn btn-square btn-neutral">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-            class="bi bi-arrow-left-short" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
-        </svg>
-    </button>
+<div class="flex items-center justify-between m-3 gap-3">
 
-    <button (click)="changeYear(0)" class="btn btn-square btn-wide text-2xl font-bold btn-primary">
-        {{ eventYear }}
-    </button>
+    <div class="tooltip tooltip-bottom ml-auto" [attr.data-tip]="eventYear - 1">
+        <button (click)="changeYear(eventYear - 1)" class="btn btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+            </svg>
+        </button>
+    </div>
 
-    <button (click)="changeYear(eventYear + 1)" class="md:mr-auto btn btn-square btn-neutral">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
-            class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-        </svg>
-    </button>
+    <div class="tooltip tooltip-bottom" data-tip="List all events">
+        <button (click)="changeYear(0)" class="btn text-2xl font-bold btn-success">
+            {{ eventYear }}
+        </button>
+    </div>
+
+
+    <div class="tooltip tooltip-bottom mr-auto" [attr.data-tip]="eventYear + 1">
+        <button (click)="changeYear(eventYear + 1)" class="btn btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor"
+                class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+            </svg>
+        </button>
+    </div>
 </div>
 
 <div class="invisible h-0 md:h-auto md:visible lg:container lg:m-auto">
-    <div class="wrapper bg-base-100 rounded w-full">
-        <table class="w-full">
+    <div class="wrapper bg-base-100 w-full">
+        <table class="w-full rounded-lg border-separate border-spacing-3">
             <thead>
                 <tr class="bg-neutral">
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Sunday</span>
                     </th>
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Monday</span>
                     </th>
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Tuesday</span>
                     </th>
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Wednesday</span>
                     </th>
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Thursday</span>
                     </th>
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Friday</span>
                     </th>
-                    <th class="p-2 border h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
+                    <th class="shadow-xl rounded-2xl p-2 h-10 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 xl:text-sm text-xs">
                         <span class="xl:block lg:block md:block sm:block hidden">Saturday</span>
                     </th>
                 </tr>
@@ -52,32 +60,30 @@
                 @for (row of this.calendarNumbers; track row.valueOf; let i = $index) {
                 <tr class="text-center">
                     @for (col of row; track col.valueOf; let j = $index) {
+                    <!--hover:dark:text-accent-content-->
                     <td (click)="calendarDisabled[i][j]?'': navigateSolver(col)"
-                        [class]="calendarDisabled[i][j]? '':'hover:bg-primary cursor-pointer bg-base-300 hover:dark:text-accent-content'"
-                        class="border p-1 h-40 xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease"
-                        style="background-image: none; background-position: center center; background-repeat: no-repeat;">
-                        <div class="flex flex-col h-40 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
-                            <div class="top h-5 w-full font-mono font-bold">
-                                <span class="">{{ col }}</span>
+                        [class]="calendarDisabled[i][j]? 'text-neutral-content/50':'hover:bg-neutral cursor-pointer bg-base-300'"
+                        class="bg-base-200 rounded-3xl xl:w-40 lg:w-30 md:w-30 sm:w-20 w-10 overflow-auto transition duration-500 ease">
+                        <div class="flex flex-col h-32 xl:w-40 lg:w-30 md:w-30 sm:w-full w-10 mx-auto overflow-hidden">
+                            <div class="top h-5 my-2 w-full font-mono font-bold">
+                                <span class="text-lg">{{ col }}</span>
                             </div>
-                            <!--div class="bottom flex-grow h-30 py-1 w-full">
-                                <div class="event bg-purple-400 text-white rounded p-1 text-sm mb-1">
-                                    <span class="event-name">
-                                        Meeting
-                                    </span>
-                                    <span class="time">
-                                        12:00~14:00
+                            @if (calendarDisabled[i][j] == false) {
+                            <div class="flex-grow">
+                                <div class="text-sm">
+                                    <span>
+                                        {{ getDayName(col) }}
                                     </span>
                                 </div>
-                                <div class="event bg-purple-400 text-white rounded p-1 text-sm mb-1">
-                                    <span class="event-name">
-                                        Meeting
-                                    </span>
-                                    <span class="time">
-                                        18:00~20:00
+                            </div>
+                            <div class="p-3 w-full">
+                                <div class="text-sm">
+                                    <span>
+                                        {{ getEmojiStory(col) }}
                                     </span>
                                 </div>
-                            </div-->
+                            </div>
+                            }
                         </div>
                     </td>
                     }
@@ -88,28 +94,20 @@
     </div>
 </div>
 
-<div class="md:hidden">
+<div class="md:hidden h-svh">
     @for (row of this.calendarNumbers; track row.valueOf; let i = $index) {
     @for (col of row; track col.valueOf; let j = $index) {
     @if(calendarDisabled[i][j] == false){
     <div class="m-3 flex items-center gap-3">
-        <div class="flex flex-col items-center rounded-box p-3 bg-base-200 shadow-md">
-            <span class="countdown font-mono text-5xl">
+        <div class="flex flex-col items-center rounded-box p-2 bg-base-200 shadow-md w-32 h-20">
+            <span class="countdown font-mono text-4xl">
                 <span [style]="'--value:'+col+';'"></span>
             </span>
-            <span class="text-xs">{{ getDayLabel((weekDayStart + col - 1)%7) }}</span>
+            <span class="text-xs m-auto">{{ getDayLabel((weekDayStart + col - 1)%7) }}</span>
         </div>
-        <div class="hover:dark:text-accent-content flex items-center rounded-2xl cursor-pointer bg-base-200 transition duration-500 ease hover:bg-primary shadow-md w-full gap-3 p-3"
+        <div class="hover:dark:text-accent-content flex items-center rounded-2xl cursor-pointer bg-base-200 transition duration-500 ease hover:bg-primary shadow-md w-full gap-3 p-4 h-20"
             (click)="navigateSolver(col)">
-            <div class="avatar">
-                <div class="w-16 rounded-lg">
-                    <img src="https://daisyui.com/tailwind-css-component-profile-2@56w.png"
-                        alt="Avatar Tailwind CSS Component" />
-                </div>
-            </div>
-            <div>
-                <div class="font-bold">Hart dsasd sdasdas asdasd ssssrty</div>
-            </div>
+            <div class="font-bold">{{ getEmojiStory(col) }} - {{ getDayName(col) }}</div>
         </div>
     </div>
     }
