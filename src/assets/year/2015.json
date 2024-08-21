@@ -46,5 +46,11 @@
         "emojiStory": "📝🔢💾",
         "gitFolderName": "08_matchsticks",
         "name": "Matchsticks"
+    },
+    {
+        "day": 9,
+        "emojiStory": "🌍🗺️🚗",
+        "gitFolderName": "09_all_in_a_single_night",
+        "name": "All in a Single Night"
     }
 ]

@@ -5,13 +5,16 @@ import { EventComponent } from './components/event/event.component';
 
 export const routes: Routes = [{
     path: '',
-    component: HomeComponent
+    component: HomeComponent,
+    title: 'Advent of Code Solver'
 }, {
     path: ':year',
-    component: EventComponent
+    component: EventComponent,
+    title: 'Advent of Code Solver | Calendar'
 }, {
     path: ':year/:day',
-    component: SolverComponent
+    component: SolverComponent,
+    title: 'Advent of Code Solver | Day'
 }, {
     path: '**',
     redirectTo: ''

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { EventsService } from '../../services/events/events.service';
 import { EventDay } from '../../interfaces/events';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-event',
@@ -21,11 +22,12 @@ export class EventComponent implements OnInit {
 
   eventDaysData: EventDay[] = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private eventService: EventsService, private titleService: Title) { }
 
   ngOnInit() {
     this.eventYear = Number(this.route.snapshot.paramMap.get('year'));
     this.loadCalendar();
+    this.titleService.setTitle(`Advent of Code Solver ${this.eventYear}`);
   }
 
   loadCalendar() {
@@ -34,7 +36,7 @@ export class EventComponent implements OnInit {
     this.eventService.getEventDays(this.eventYear).subscribe({
       next: (daysData: any) => {
         this.eventDaysData = daysData;
-        
+
         this.genCalendarNumbers(this.weekDayStart);
         this.eventService.getEventsYearList().subscribe({
           next: (yearsData: any) => {

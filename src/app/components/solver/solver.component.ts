@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SolverService } from '../../services/solver/solver.service';
 import { AOC_URL, GIT_URL } from '../../services/config/config.service';
 import { EventsService } from '../../services/events/events.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-solver',
@@ -29,11 +30,12 @@ export class SolverComponent {
   aocUrl = AOC_URL;
   gitUrl = GIT_URL;
 
-  constructor(private route: ActivatedRoute, private router: Router, private eventsService: EventsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private eventsService: EventsService, private titleService: Title) { }
 
   ngOnInit() {
     this.eventYear = Number(this.route.snapshot.paramMap.get('year'));
     this.eventDay = Number(this.route.snapshot.paramMap.get('day'));
+
 
     if (this.eventDay < 1 || this.eventDay > 25) {
       this.router.navigate(['/', this.eventYear.toString()]);
@@ -52,6 +54,7 @@ export class SolverComponent {
         this.router.navigate(['/', this.eventYear.toString()]);
       }
     });
+    this.titleService.setTitle(`Advent of Code Solver ${this.eventYear} - Day ${this.eventDay}: ${this.name}`);
   }
 
   navigateCancel() {
