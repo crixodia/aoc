@@ -31,6 +31,32 @@ export function getCombinations<T>(arr: T[], size: number): T[][] {
 }
 
 /**
+ * Gets the permutations of an array.
+ * @param {T} arr - The array to get the combinations from.
+ * @param {number} size - The size of the combinations.
+ * @returns {T[][]} - The combinations of the array.
+ */
+export function getPermutations<T>(arr: T[], size: number): T[][] {
+  const results: T[][] = [];
+
+  function permute(current: T[], remaining: T[]): void {
+    if (current.length === size) {
+      results.push([...current]);
+      return;
+    }
+
+    for (let i = 0; i < remaining.length; i++) {
+      const newCurrent = current.concat(remaining[i]);
+      const newRemaining = remaining.slice(0, i).concat(remaining.slice(i + 1));
+      permute(newCurrent, newRemaining);
+    }
+  }
+
+  permute([], arr);
+  return results;
+}
+
+/**
  * Adds two arrays.
  * @param {number[]} arrA - The first array.
  * @param {number[]} arrB - The second array. 
@@ -80,7 +106,11 @@ export function containsArray(source: any[][], target: any[]): boolean {
  */
 export const sumArray = (arr: number[]): number => arr.reduce((a, b) => a + b, 0);
 
-
+/**
+ * Evaluate if a value is a decimal.
+ * @param {string | number} value - The value to evaluate.
+ * @returns {boolean} - True if the value is a decimal, false otherwise.
+ */
 export function isDecimal(value?: string | number): boolean {
   return ((value != null) &&
     (value !== '') &&

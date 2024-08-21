@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getCombinations, addArrs, containsArray, sumArray, isDecimal } from '../../helpers'
+import { getCombinations, addArrs, containsArray, sumArray, isDecimal, getPermutations } from '../../helpers'
 import { Md5 } from 'ts-md5';
 
 @Injectable({
@@ -419,5 +419,69 @@ export class Aoc2015Service {
 
     return [ans1, ans2];
   }
-}
 
+  /**
+   * Day 9: All in a Single Night
+   * @param input {string} - The input string.
+   * @returns {[number, number]} - [Part One, Part Two] solution.
+   */
+  day9 = (input: string): number[] => {
+    interface WeightMap {
+      [city: string]: {
+        [city: string]: number;
+      };
+    }
+
+    const readInput = (input: string): [Set<string>, WeightMap] => {
+      let cities: Set<string> = new Set<string>();
+      let weights: WeightMap = {};
+
+      const lines: string[] = input.split("\n").map((x) => x.replace(" ", ""));
+
+      for (const line of lines) {
+        const [C, w] = line.split("=");
+        let [ca, cb] = C.split("to");
+
+        ca = ca.trim();
+        cb = cb.trim();
+
+        cities.add(ca);
+        cities.add(cb);
+
+        if (!weights[ca]) weights[ca] = {};
+        weights[ca][cb] = Number(w);
+
+        if (!weights[cb]) weights[cb] = {};
+        weights[cb][ca] = Number(w);
+      }
+
+      return [cities, weights]
+    }
+
+    const partOneTwo = (parsedInput: [Set<string>, WeightMap]): number[] => {
+      const [cities, weights] = parsedInput;
+
+      const citiesArr = Array.from(cities);
+      const possiblePaths = getPermutations(citiesArr, citiesArr.length);
+
+      let distances: number[] = [];
+
+      for (const path of possiblePaths) {
+        let d = 0;
+        let i = 0;
+
+        for (let j = 1; j < path.length; j++) {
+          d += weights[path[i]][path[j]];
+          i += 1;
+        }
+
+        distances.push(d)
+      }
+
+      return [Math.min(...distances), Math.max(...distances)];
+    }
+
+    const parsedInput = readInput(input);
+    return partOneTwo(parsedInput);
+  }
+}
