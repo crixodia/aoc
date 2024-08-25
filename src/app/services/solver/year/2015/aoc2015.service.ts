@@ -484,4 +484,42 @@ export class Aoc2015Service {
     const parsedInput = readInput(input);
     return partOneTwo(parsedInput);
   }
+
+  /**
+   * Day 10: Elves Look, Elves Say
+   * @param input {string} - The input string.
+   * @returns {number[]} - [Part One, Part Two] solution.
+   */
+  day10 = (input: string): number[] => {
+    const step = (input: string): string => {
+      let last: string = input.charAt(0);
+      let count: number = 1;
+      let output: string[] = [];
+
+      for (let i = 1; i < input.length; i++) {
+        const currentChar = input.charAt(i);
+
+        if (currentChar === last) {
+          count++;
+        } else {
+          output.push(`${count}${last}`);
+          last = currentChar;
+          count = 1;
+        }
+      }
+      output.push(`${count}${last}`);
+      return output.join('');
+    }
+
+    const partOneTwo = (input: string, times: number): number => {
+      let output: string = input;
+
+      for (let i = 0; i < times; i++) {
+        output = step(output);
+      }
+      return output.length;
+    }
+
+    return [partOneTwo(input, 40), partOneTwo(input, 50)];
+  }
 }
