@@ -5,25 +5,26 @@ def read_file(file):
 
 def step(input):
     last = input[0]
-    count = 0
-    output = ""
+    count = 1
+    output = []
 
-    for c in input:
+    for i in range(1, len(input)):
+        c = input[i]
         if last == c:
             count += 1
         else:
-            output = output + f"{count}{last}"
-            count = 1
+            output.append(f"{count}{last}")
             last = c
-    output = output + f"{count}{last}"
-    return output
+            count = 1
+
+    output.append(f"{count}{last}")
+    return ''.join(output)
 
 
 def solve(input, times):
-    output = ""
-    for i in range(times):
-        output = step(input)
-        input = output
+    output = input
+    for _ in range(times):
+        output = step(output)
     return len(output)
 
 
