@@ -28,39 +28,30 @@ def solve(puzzle):
 
 def solve2(puzzle):
     files, space = puzzle[::2], puzzle[1::2]
+
+    print(files, space)
     if len(space) < len(files):
         space.append(0)
 
+    indices = list(range(len(files)))
+
     drive = []
     for i, f in enumerate(files):
-        drive.append([i]*f)
+        drive.extend([indices[i]]*f)
 
-        if space[i] != 0:
-            drive.append([None]*space[i])
-
-    i = 0
-    while i < len(drive):
-        if set(drive[i]) == {None}:
-
-            j = len(drive) - 1
-            while j > i:
-                if set(drive[j]) == {None}:
-                    j -= 1
-                    continue
-
-                if len(drive[j]) <= len(drive[i]):
-                    size = len(drive[i])
-                    drive[i] = drive[j].copy()
-                    none_len = size - len(drive[j])
-                    if none_len != 0:
-                        drive.insert(i+1, [None]*none_len)
-
-                    drive[j+1] = [None] * len(drive[i])
-                    print(drive, none_len)
+        found = True
+        count = 0
+        while found:
+            for k in range(len(files), i, -1):
+                if files[k] <= space[i]:
+                    drive.extend([indices[k]]*files[k])
+                    indices[k] = -1
+                    count += files[k]
                     break
 
-                j -= 1
-        i += 1
+                found = False
+        
+        
 
     return drive
 
