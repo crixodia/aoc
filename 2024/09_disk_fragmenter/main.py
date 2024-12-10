@@ -4,6 +4,7 @@ def read_input(input_file="input.txt"):
 
 def solve(puzzle):
     files, space = puzzle[::2], puzzle[1::2]
+
     if len(space) < len(files):
         space.append(0)
 
@@ -29,7 +30,6 @@ def solve(puzzle):
 def solve2(puzzle):
     files, space = puzzle[::2], puzzle[1::2]
 
-    print(files, space)
     if len(space) < len(files):
         space.append(0)
 
@@ -37,23 +37,22 @@ def solve2(puzzle):
 
     drive = []
     for i, f in enumerate(files):
+
         drive.extend([indices[i]]*f)
 
-        found = True
         count = 0
-        while found:
-            for k in range(len(files), i, -1):
-                if files[k] <= space[i]:
-                    drive.extend([indices[k]]*files[k])
-                    indices[k] = -1
-                    count += files[k]
-                    break
+        for k in range(len(files)-1, i, -1):
+            if indices[k] == -1:
+                continue
 
-                found = False
-        
-        
+            if files[k] <= space[i] - count:
+                drive.extend([indices[k]]*files[k])
+                indices[k] = -1
+                count += files[k]
 
-    return drive
+        drive.extend([-1]*(space[i]-count))
+
+    return sum([x * i if x >= 0 else 0 for i, x in enumerate(drive)])
 
 
 puzzle = read_input()
