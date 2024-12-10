@@ -1,5 +1,4 @@
-import time
-import os
+from concurrent.futures import ProcessPoolExecutor
 from copy import deepcopy
 
 
@@ -107,31 +106,33 @@ def solve(guard_map, animate=False):
     return len(positions), positions, is_loop
 
 
+# Define process_path as a top-level function
+
+def process_path(args):
+    guard_map, coords = args
+    i, j = coords
+    new_guard_map = deepcopy(guard_map)
+    if new_guard_map[i][j] in DIRECTIONS:
+        return 0
+    new_guard_map[i][j] = "#"
+    _, _, is_loop = solve(new_guard_map)
+    return 1 if is_loop else 0
+
+
 def solve2(guard_map, available_path):
-    number_loop_obstacles = 0
+    # Pass both guard_map and coordinates to process_path
+    with ProcessPoolExecutor() as executor:
+        results = list(executor.map(
+            process_path, [(guard_map, coords) for coords in available_path]))
 
-    k = 0
-    for i, j in available_path:
-        k += 1
-        new_guard_map = deepcopy(guard_map)
-
-        if new_guard_map[i][j] in DIRECTIONS:
-            continue
-
-        new_guard_map[i][j] = "#"
-
-        _, _, is_loop = solve(new_guard_map)
-
-        if is_loop:
-            number_loop_obstacles += 1
-
-    return number_loop_obstacles
+    return sum(results)
 
 
-puzzle = read_input()
-puzzle2 = read_input()
+if __name__ == '__main__':
+    puzzle = read_input()
+    puzzle2 = read_input()
 
-ans1, positions, _ = solve(puzzle, True)
-ans2 = solve2(puzzle2, positions)
-ans = (ans1, ans2)
-print(ans)
+    ans1, positions, _ = solve(puzzle, True)
+    ans2 = solve2(puzzle2, positions)
+    ans = (ans1, ans2)
+    print(ans)
