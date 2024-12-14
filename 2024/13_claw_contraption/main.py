@@ -24,13 +24,27 @@ def read_input(input_file="input.txt"):
     return claws
 
 
-def scale_vect(alpha, vetc):
-    new_vect = []
-    for el in vetc:
-        new_vect.append(alpha * el)
+def solve(puzzle, offset=0):
+    sum_tokens = 0
+    for claw in puzzle:
+        Ax, Ay = claw["A"]
+        Bx, By = claw["B"]
+        Px, Py = claw["P"]
 
-    return tuple(new_vect)
+        Px += offset
+        Py += offset
+
+        b = round((Ax*Py - Ay*Px)/(By*Ax-Ay*Bx), 2)
+        a = round((Px - b*Bx) / Ax, 2)
+
+        if str(a).split(".")[1] != "0" or str(b).split(".")[1] != "0":
+            continue
+
+        sum_tokens += 3*a + b
+
+    return int(sum_tokens)
 
 
 puzzle = read_input()
-print(puzzle)
+ans = (solve(puzzle), solve(puzzle, 10000000000000))
+print(ans)
