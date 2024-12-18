@@ -31,40 +31,47 @@ def get_region(dir, plot):
 
 
 def is_region_inside(R1, R2):
+    check = []
     for i, j in R2:
-        ns = filter(lambda x: x[0] == i, R1)
-        we = filter(lambda x: x[1] == j, R1)
+        ns = filter(lambda x: x[1] == j, R1)
+        we = filter(lambda x: x[0] == i, R1)
 
-        ns = combinations(ns, 2)
-        we = combinations(we, 2)
+        ns = [(x[0][0], x[1][0]) for x in combinations(ns, 2)]
+        we = [(x[0][1], x[1][1]) for x in combinations(we, 2)]
 
-        for n, s in ns:
-            _, ny = n
-            _, sy = s
+        if ns == [] or we == []:
+            return False
 
-            if not (ny < i < sy or sy < i < ny):
-                continue
+        for ns1, ns2 in ns:
+            n = min(ns1, ns2)
+            s = max(ns1, ns2)
 
-            for w, e in we:
-                wx, _ = w
-                ex, _ = e
+            found = False
 
-                if not (wx < j < ex or ex < j < wx):
-                    continue
+            if n < i < s:
+                for we1, we2 in we:
+                    w = min(we1, we2)
+                    e = max(we1, we2)
 
-                return False
+                    if w < j < e:
+                        check.append(True)
+                        found = True
+                        break
+            if found:
+                break
 
-    return True
+    return all != [] and all(check)
 
 
 def solve(puzzle):
     rows, cols = len(puzzle), len(puzzle[0])
 
     all_visited = set()
+
     areas = []
     perimeters = []
-
     region_borders = dict()
+    regions = dict()
 
     for i in range(rows):
         for j in range(cols):
@@ -72,6 +79,7 @@ def solve(puzzle):
                 continue
 
             r = get_region((i, j), puzzle)
+            regions[(i, j)] = r.copy()
 
             border = set()
             all_visited.update(r)
@@ -105,10 +113,33 @@ def solve(puzzle):
                 continue
 
             if is_region_inside(v, vv):
-                parent_child[k] = kk
+                if k not in parent_child:
+                    parent_child[k] = [kk]
+                else:
+                    parent_child[k].append(kk)
 
-    print(parent_child)
-    print(list(region_borders.keys()))
+    all_childs = [v for k, v in parent_child.items()]
+    all_childs = sum(all_childs, [])
+
+    inmediate_childs = {}
+    for k, v in parent_child.items():
+        for vv in v:
+            if all_childs.count(vv) == 1:
+                if k not in inmediate_childs:
+                    inmediate_childs[k] = [vv]
+                else:
+                    inmediate_childs[k].append(vv)
+            all_childs.remove(vv)
+
+    external_sides = dict()
+    for r in regions:
+        for i, j in r:
+            neighbors = list(
+                filter(
+                    lambda x: 0 <= x[0] < rows and 0 <= x[1] < cols,
+                    [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]
+                )
+            )
 
     return sum([areas[i] * perimeters[i] for i in range(len(areas))])
 
