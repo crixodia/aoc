@@ -1,3 +1,6 @@
+from functools import lru_cache
+
+
 def read_input(input_file="input.txt"):
     program = []
     registers = []
@@ -36,7 +39,6 @@ def solve(puzzle):
     i = 0
     output = []
     while i < len(program):
-        print(i, A, B, C, output, program[i])
         op_code = program[i+1]
         combo = get_combo(op_code, A, B, C)
         match(program[i]):
@@ -61,10 +63,36 @@ def solve(puzzle):
 
         i += 2
 
-    print(A, B, C)
-    return "".join(output)
+    return ",".join(output)
+
+
+def reverse_program(i, program, current, A, B, C):
+    if i == -1 or program == current:
+        return current, A, B, C
+
+    p = 5
+    current_l = []
+    for op_code in range(7):
+        a, b, c = A, B, C
+        if 0 <= op_code <= 3:
+            pass
+        elif op_code == 4:
+            a, b, c = program[i], B, C
+        elif open == 5:
+            a, b, c = A, program[i], C
+        else:
+            a, b, c = A, B, program[i]
+
+        new_current, a, b, c = reverse_program(i-1, program, current, a, b, c)
+        current_l.append("".join([
+            new_current,
+            str(p),
+            str(op_code)
+        ]))
+
+    return current, A, B, C
 
 
 puzzle = read_input()
-ans = (solve(puzzle), )
+ans = (solve(puzzle), reverse_program(2, "505154", "", 10, 0, 0))
 print(ans)
