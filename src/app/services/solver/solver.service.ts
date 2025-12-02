@@ -9,6 +9,7 @@ import { Aoc2021Service } from './year/2021/aoc2021.service';
 import { Aoc2022Service } from './year/2022/aoc2022.service';
 import { Aoc2023Service } from './year/2023/aoc2023.service';
 import { Aoc2024Service } from './year/2024/aoc2024.service';
+import { Aoc2025Service } from './year/2025/aoc2025.service';
 
 enum Year {
   Aoc2015 = 2015,
@@ -20,7 +21,8 @@ enum Year {
   Aoc2021 = 2021,
   Aoc2022 = 2022,
   Aoc2023 = 2023,
-  Aoc2024 = 2024
+  Aoc2024 = 2024,
+  Aoc2025 = 2025
 }
 
 
@@ -64,6 +66,9 @@ export class SolverService {
         break;
       case Year.Aoc2024:
         aocYearService = new Aoc2024Service();
+        break;
+      case Year.Aoc2025:
+        aocYearService = new Aoc2025Service();
         break;
       default:
         return null;
