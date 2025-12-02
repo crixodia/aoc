@@ -7,46 +7,51 @@
     {
         "year": 2016,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2017,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2018,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2019,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2020,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2021,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2022,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2023,
         "imageUrl": "",
-        "done": false
+        "done": true
     },
     {
         "year": 2024,
         "imageUrl": "",
-        "done": false
+        "done": true
+    },
+    {
+        "year": 2025,
+        "imageUrl": "",
+        "done": true
     }
 ]
